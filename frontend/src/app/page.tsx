@@ -30,30 +30,38 @@ export default async function Home() {
       </section>
 
       <div className="kpi-grid">
-        <div className="kpi kpi-accent-blue">
+        <div className="kpi kpi-accent-teal">
           <span className="kpi-icon" aria-hidden="true">👥</span>
-          <div className="label">Simulated patients</div>
-          <div className="value">{dash.total_patients}</div>
-          <div className="sub">7 days of vitals each</div>
+          <div className="kpi-body">
+            <div className="label">Simulated patients</div>
+            <div className="value">{dash.total_patients}</div>
+            <div className="sub">7 days of vitals each</div>
+          </div>
         </div>
         <div className="kpi danger kpi-accent-red">
           <span className="kpi-icon" aria-hidden="true">⚠</span>
-          <div className="label">High-risk patients</div>
-          <div className="value">{dash.high_risk_patients}</div>
-          <div className="sub">of {dash.total_patients} patients</div>
+          <div className="kpi-body">
+            <div className="label">High-risk patients</div>
+            <div className="value">{dash.high_risk_patients}</div>
+            <div className="sub">of {dash.total_patients} patients</div>
+          </div>
         </div>
         <div className="kpi kpi-accent-amber">
           <span className="kpi-icon" aria-hidden="true">🔔</span>
-          <div className="label">Open alerts</div>
-          <div className="value">{dash.open_alerts}</div>
-          <div className="sub">Need review</div>
+          <div className="kpi-body">
+            <div className="label">Open alerts</div>
+            <div className="value">{dash.open_alerts}</div>
+            <div className="sub">Need review</div>
+          </div>
         </div>
         <div className="kpi kpi-accent-green">
           <span className="kpi-icon" aria-hidden="true">✓</span>
-          <div className="label">Model ROC-AUC (test)</div>
-          <div className="value">{metrics.test_roc_auc.toFixed(3)}</div>
-          <div className="sub">
-            Accuracy {(metrics.test_accuracy * 100).toFixed(1)}% · {metrics.rows} training rows
+          <div className="kpi-body">
+            <div className="label">Model ROC-AUC (test)</div>
+            <div className="value">{metrics.test_roc_auc.toFixed(3)}</div>
+            <div className="sub">
+              Accuracy {(metrics.test_accuracy * 100).toFixed(1)}% · {metrics.rows} training rows
+            </div>
           </div>
         </div>
       </div>

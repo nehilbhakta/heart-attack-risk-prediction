@@ -1,9 +1,9 @@
 import type { ReactNode } from "react";
-import { Inter } from "next/font/google";
+import { Manrope } from "next/font/google";
 import Link from "next/link";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"], display: "swap", variable: "--font-inter" });
+const manrope = Manrope({ subsets: ["latin"], display: "swap", variable: "--font-manrope" });
 
 export const metadata = {
   title: "HeartRisk — Heart Attack Risk Prediction",
@@ -13,7 +13,7 @@ export const metadata = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en" className={inter.variable}>
+    <html lang="en" className={manrope.variable}>
       <body>
         <header className="site">
           <nav className="site-nav">
