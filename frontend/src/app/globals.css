@@ -34,32 +34,95 @@ a { color: var(--teal); text-decoration: none; }
 a:hover { text-decoration: underline; }
 
 header.site {
-  background: var(--teal-deep);
+  background: linear-gradient(120deg, var(--teal-deep) 0%, #115e59 60%, #0f766e 100%);
   color: #fff;
-  padding: 16px 24px;
+  padding: 14px 24px;
+  box-shadow: 0 2px 12px rgba(13, 79, 74, 0.25);
 }
 header.site a { color: #fff; font-weight: 700; font-size: 1.25rem; }
+/* Dark teal header: logo left, segmented nav centred, bell right. */
+.site-nav {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 16px;
+  max-width: 1280px;
+  margin: 0 auto;
+}
 .wordmark {
   display: inline-flex;
   align-items: center;
   gap: 10px;
   letter-spacing: -0.01em;
+  justify-self: start;
 }
 .wordmark:hover { text-decoration: none; }
-.wordmark-mark {
+.wordmark-text { font-size: 1.25rem; font-weight: 800; }
+.heart-logo { display: inline-flex; flex: none; }
+.heart-logo svg { display: block; filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.25)); }
+/* Segmented control: one rounded container, three segments. */
+.segmented {
+  justify-self: center;
+  display: flex;
+  gap: 2px;
+  padding: 4px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 999px;
+}
+.seg {
   display: inline-flex;
-  align-items: flex-end;
-  gap: 3px;
-  height: 22px;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  color: #a7f3d0;
+  font-size: 0.95rem;
+  font-weight: 700;
+  white-space: nowrap;
 }
-.wordmark-mark span {
-  display: block;
-  width: 7px;
-  border-radius: 2px;
+.seg:hover { color: #fff; background: rgba(255, 255, 255, 0.1); text-decoration: none; }
+.seg.active {
+  background: var(--emerald);
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
 }
-.wordmark-mark span:nth-child(1) { height: 22px; background: var(--teal); }
-.wordmark-mark span:nth-child(2) { height: 22px; background: var(--emerald-bright); }
-.wordmark-mark span:nth-child(3) { height: 22px; background: #a7f3d0; }
+.seg-icon { display: inline-flex; flex: none; }
+.seg-icon svg { display: block; }
+/* Bell button with red open-alert count badge. */
+.bell-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  min-height: 44px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  color: #fff;
+  justify-self: end;
+}
+.bell-btn:hover { background: rgba(255, 255, 255, 0.18); text-decoration: none; }
+.bell-btn svg { width: 20px; height: 20px; }
+.bell-badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 5px;
+  border-radius: 999px;
+  background: var(--red-bright);
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 800;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--teal-deep);
+}
 
 .hero { margin-bottom: 28px; }
 .hero h1 { font-size: 2rem; letter-spacing: -0.02em; }
@@ -197,14 +260,6 @@ input[type="date"] { min-height: 48px; }
 .empty { color: var(--muted); text-align: center; padding: 40px 16px; }
 
 /* HeartRisk additions */
-.site-nav { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; }
-header.site {
-  background: linear-gradient(120deg, var(--teal-deep) 0%, #115e59 60%, #0f766e 100%);
-  box-shadow: 0 2px 12px rgba(13, 79, 74, 0.25);
-}
-.nav-links { display: flex; gap: 6px; margin-left: auto; }
-.nav-links a { color: #a7f3d0; font-weight: 600; font-size: 0.95rem; padding: 8px 12px; border-radius: 999px; }
-.nav-links a:hover { color: #fff; background: rgba(255, 255, 255, 0.12); text-decoration: none; }
 
 /* Gradient hero band (home) */
 .hero-band {
@@ -347,7 +402,13 @@ ul.factors li { margin-bottom: 6px; }
   main { padding: 16px; }
   .columns { flex-direction: column; }
   .column { min-width: 100%; }
-  .nav-links { margin-left: 0; }
+  header.site { padding: 12px 16px; }
+  .site-nav { gap: 10px; }
+  .wordmark-text { font-size: 1.1rem; }
+  /* Segmented nav collapses to icon-only segments on small screens. */
+  .seg { padding: 8px 11px; }
+  .seg-label { display: none; }
+  .bell-btn { width: 40px; height: 40px; min-height: 40px; }
   .hero-band { padding: 24px 20px; }
   .hero-band h1 { font-size: 1.6rem; }
   .kpi .value { font-size: 2rem; }

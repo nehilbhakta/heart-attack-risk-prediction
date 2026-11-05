@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import { Manrope } from "next/font/google";
-import Link from "next/link";
 import "./globals.css";
+import SiteHeader from "@/components/SiteHeader";
 
 const manrope = Manrope({ subsets: ["latin"], display: "swap", variable: "--font-manrope" });
 
@@ -15,23 +15,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" className={manrope.variable}>
       <body>
-        <header className="site">
-          <nav className="site-nav">
-            <Link href="/" className="wordmark" aria-label="HeartRisk home">
-              <span className="wordmark-mark" aria-hidden="true">
-                <span />
-                <span />
-                <span />
-              </span>
-              HeartRisk
-            </Link>
-            <span className="nav-links">
-              <Link href="/">Patients</Link>
-              <Link href="/alerts">Alerts</Link>
-              <Link href="/check">Check risk</Link>
-            </span>
-          </nav>
-        </header>
+        <SiteHeader />
         <main>{children}</main>
         <footer className="disclaimer">
           Demo / educational project with simulated patients. The model is trained

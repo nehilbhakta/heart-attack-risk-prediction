@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="HeartRisk">
-  <rect width="64" height="64" rx="18" fill="#0d4f4a"/>
-  <path d="M32 50 C18 40 12 31 12 23 C12 16 17 12 22 12 C26 12 30 15 32 18 C34 15 38 12 42 12 C47 12 52 16 52 23 C52 31 46 40 32 50 Z" fill="#10b981"/>
-  <path d="M20 32 h7 l3-6 4 10 3-4 h7" stroke="#ffffff" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="2" y="2" width="60" height="60" rx="17" fill="#0d4f4a" stroke="#10b981" stroke-width="3"/>
+  <path d="M32 50 C20 42 14 35 14 27 C14 21.5 18 17.5 22.5 17.5 C26 17.5 29.5 19.8 32 22.5 C34.5 19.8 38 17.5 41.5 17.5 C46 17.5 50 21.5 50 27 C50 35 44 42 32 50 Z" fill="none" stroke="#ffffff" stroke-width="3.5" stroke-linejoin="round"/>
+  <path d="M20 32.5 h7 l2.8-5.5 4 9.5 2.6-4 h7.6" stroke="#10b981" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>
