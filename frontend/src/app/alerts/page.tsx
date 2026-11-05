@@ -29,6 +29,7 @@ export default function AlertsPage() {
 
   return (
     <div>
+      <p className="section-label">Monitoring</p>
       <h1>Alerts</h1>
       <p className="muted">
         High-risk predictions raise an alert here — the local equivalent of the

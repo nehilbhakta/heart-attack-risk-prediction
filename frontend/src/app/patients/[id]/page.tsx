@@ -38,6 +38,11 @@ export default function PatientPage({ params }: { params: Promise<{ id: string }
   if (!patient) return <p className="muted">Loading patient…</p>;
 
   const maxHr = Math.max(...patient.vitals.map((v) => v.heart_rate), 1);
+  const prob = patient.latest_probability ?? 0;
+  const band = patient.latest_risk_band ?? "low";
+  const gaugeR = 54;
+  const gaugeC = 2 * Math.PI * gaugeR;
+  const gaugeOffset = gaugeC * (1 - prob);
   return (
     <div>
       <p>
@@ -54,16 +59,35 @@ export default function PatientPage({ params }: { params: Promise<{ id: string }
       <div className="detail-grid">
         <div className="detail-card">
           <h3>Risk score</h3>
-          <p className="risk">
-            <span className={`badge ${patient.latest_risk_band ?? "low"}`}>
-              {patient.latest_risk_band ?? "—"} risk
-            </span>
-            <span style={{ fontSize: "1.5rem" }}>{pct(patient.latest_probability)}</span>
-          </p>
+          <div className="gauge-wrap">
+            <div className="gauge" role="img" aria-label={`Risk score ${pct(patient.latest_probability)}, ${band} risk`}>
+              <svg width="132" height="132" viewBox="0 0 132 132" aria-hidden="true">
+                <circle className="gauge-track" cx="66" cy="66" r={gaugeR} />
+                <circle
+                  className={`gauge-value ${band}`}
+                  cx="66"
+                  cy="66"
+                  r={gaugeR}
+                  strokeDasharray={gaugeC}
+                  strokeDashoffset={gaugeOffset}
+                />
+              </svg>
+              <div className="gauge-centre">
+                <strong>{pct(patient.latest_probability)}</strong>
+                <span>risk score</span>
+              </div>
+            </div>
+            <div>
+              <span className={`badge ${band}`}>{band} risk</span>
+              <p className="muted" style={{ marginTop: 8 }}>
+                Model probability of heart disease for this patient.
+              </p>
+            </div>
+          </div>
           <div className="risk-bar">
             <span
-              className={patient.latest_risk_band ?? "low"}
-              style={{ width: `${Math.round((patient.latest_probability ?? 0) * 100)}%` }}
+              className={band}
+              style={{ width: `${Math.round(prob * 100)}%` }}
             />
           </div>
         </div>
@@ -81,25 +105,35 @@ export default function PatientPage({ params }: { params: Promise<{ id: string }
         </div>
       </div>
 
-      <h2>What is driving this score?</h2>
+      <p className="section-label">Why this score</p>
+      <h2 className="section-title">What is driving this score?</h2>
       <ul className="factors">
         {patient.contributions.map((c) => (
           <li key={c}>{c}</li>
         ))}
       </ul>
 
-      <h2>Heart rate over 7 days</h2>
+      <p className="section-label">Vitals</p>
+      <h2 className="section-title">Heart rate over 7 days</h2>
+      <p className="muted">Resting heart rate is usually 60–100 bpm. Bars outside that range are shown in red.</p>
       <div className="vital-bars">
-        {patient.vitals.map((v) => (
-          <div className="bar" key={v.day}>
-            <span style={{ height: `${Math.round((v.heart_rate / maxHr) * 90)}px` }} />
-            <span>Day {v.day}</span>
-            <span>{v.heart_rate} bpm</span>
-          </div>
-        ))}
+        {patient.vitals.map((v) => {
+          const inRange = v.heart_rate >= 60 && v.heart_rate <= 100;
+          return (
+            <div className="bar" key={v.day}>
+              <span className="bar-value">{v.heart_rate}</span>
+              <span
+                className={`bar-fill${inRange ? "" : " out"}`}
+                style={{ height: `${Math.round((v.heart_rate / maxHr) * 100)}px` }}
+              />
+              <span className="bar-day">Day {v.day}</span>
+            </div>
+          );
+        })}
       </div>
 
-      <h2>Daily vitals</h2>
+      <p className="section-label">Log</p>
+      <h2 className="section-title">Daily vitals</h2>
       <table className="data">
         <thead>
           <tr>

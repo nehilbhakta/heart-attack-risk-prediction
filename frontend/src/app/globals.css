@@ -191,52 +191,160 @@ input[type="date"] { min-height: 48px; }
 
 /* HeartRisk additions */
 .site-nav { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; }
-.nav-links { display: flex; gap: 18px; margin-left: auto; }
-.nav-links a { color: #dbe6f2; font-weight: 600; font-size: 0.95rem; }
-.nav-links a:hover { color: #fff; }
-.kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin: 20px 0 28px; }
-.kpi { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 18px 20px; box-shadow: 0 1px 3px rgba(15, 42, 68, 0.08); }
-.kpi .value { font-size: 2rem; font-weight: 800; letter-spacing: -0.02em; margin: 2px 0; }
-.kpi .label { color: var(--muted); font-size: 0.92rem; }
+header.site {
+  background: linear-gradient(120deg, var(--navy) 0%, #163a5e 60%, #17507e 100%);
+  box-shadow: 0 2px 12px rgba(15, 42, 68, 0.25);
+}
+.nav-links { display: flex; gap: 6px; margin-left: auto; }
+.nav-links a { color: #dbe6f2; font-weight: 600; font-size: 0.95rem; padding: 8px 12px; border-radius: 999px; }
+.nav-links a:hover { color: #fff; background: rgba(255, 255, 255, 0.12); text-decoration: none; }
+
+/* Gradient hero band (home) */
+.hero-band {
+  background: linear-gradient(135deg, var(--navy) 0%, #14406b 55%, var(--blue-dark) 100%);
+  border-radius: 20px;
+  padding: 32px 32px 28px;
+  margin-bottom: 28px;
+  color: #fff;
+  box-shadow: 0 10px 30px rgba(15, 42, 68, 0.22);
+}
+.hero-band h1 { color: #fff; font-size: 2.1rem; }
+.hero-band .tagline { color: #c9d9ea; font-size: 1.05rem; max-width: 720px; }
+.hero-band .hero-meta { margin-top: 16px; display: flex; flex-wrap: wrap; gap: 8px; }
+.hero-band .hero-meta span {
+  background: rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 999px;
+  padding: 4px 12px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #eaf2fa;
+}
+
+/* Section headings */
+.section-label {
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  font-size: 0.78rem;
+  font-weight: 800;
+  color: var(--blue);
+  margin: 0 0 4px;
+}
+.section-title { font-size: 1.45rem; letter-spacing: -0.015em; margin: 0 0 4px; }
+
+/* KPI cards with coloured top accent + icon dot */
+.kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin: 20px 0 32px; }
+.kpi {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-top: 4px solid var(--blue);
+  border-radius: 16px;
+  padding: 18px 20px;
+  box-shadow: 0 1px 3px rgba(15, 42, 68, 0.06), 0 8px 20px rgba(15, 42, 68, 0.05);
+}
+.kpi-accent-red { border-top-color: var(--red); }
+.kpi-accent-amber { border-top-color: var(--gold); }
+.kpi-accent-green { border-top-color: var(--green); }
+.kpi-accent-blue { border-top-color: var(--blue); }
+.kpi .kpi-icon {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 36px; height: 36px; border-radius: 50%;
+  font-size: 1.05rem; margin-bottom: 10px;
+}
+.kpi-accent-blue .kpi-icon { background: #e3edfb; }
+.kpi-accent-red .kpi-icon { background: #fdecea; }
+.kpi-accent-amber .kpi-icon { background: #fef3d7; }
+.kpi-accent-green .kpi-icon { background: #e6f3ec; }
+.kpi .value { font-size: 2.4rem; font-weight: 800; letter-spacing: -0.02em; margin: 2px 0; line-height: 1.1; }
+.kpi .label { color: var(--muted); font-size: 0.92rem; font-weight: 600; }
+.kpi .sub { color: var(--muted); font-size: 0.85rem; margin-top: 2px; }
 .kpi.danger .value { color: var(--red); }
+
+/* Patient cards — soft tint per risk band */
 .patient-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
-.patient-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 20px; display: block; color: var(--text); transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease; }
-.patient-card:hover { text-decoration: none; border-color: var(--blue); transform: translateY(-2px); box-shadow: 0 8px 20px rgba(15, 42, 68, 0.12); }
+.patient-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 20px; display: block; color: var(--text); transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease; box-shadow: 0 1px 3px rgba(15, 42, 68, 0.05); }
+.patient-card:hover { text-decoration: none; border-color: var(--blue); transform: translateY(-3px); box-shadow: 0 12px 28px rgba(15, 42, 68, 0.14); }
+.patient-card.band-high { background: linear-gradient(180deg, #fff5f4 0%, #ffffff 55%); border-color: #f3d2cd; }
+.patient-card.band-medium { background: linear-gradient(180deg, #fffaf0 0%, #ffffff 55%); border-color: #f0dfb8; }
+.patient-card.band-low { background: linear-gradient(180deg, #f0f8f3 0%, #ffffff 55%); border-color: #cbe4d6; }
 .patient-card h2 { margin: 0 0 6px; font-size: 1.15rem; }
 .risk { display: inline-flex; align-items: center; gap: 8px; font-weight: 700; }
-.risk-bar { height: 8px; background: #e8edf3; border-radius: 999px; overflow: hidden; margin: 10px 0; }
+.risk .pct { font-size: 1.1rem; }
+.risk-bar { height: 10px; background: #e8edf3; border-radius: 999px; overflow: hidden; margin: 12px 0 4px; }
 .risk-bar > span { display: block; height: 100%; border-radius: 999px; }
-.risk-bar > span.low { background: var(--green); }
-.risk-bar > span.medium { background: var(--gold); }
-.risk-bar > span.high { background: var(--red); }
-.badge { border-radius: 999px; padding: 2px 10px; font-size: 0.82rem; font-weight: 700; }
+.risk-bar > span.low { background: linear-gradient(90deg, #2e9e66, var(--green)); }
+.risk-bar > span.medium { background: linear-gradient(90deg, var(--gold), #e09b1f); }
+.risk-bar > span.high { background: linear-gradient(90deg, #e0654f, var(--red)); }
+.badge { border-radius: 999px; padding: 3px 10px; font-size: 0.82rem; font-weight: 700; display: inline-flex; align-items: center; gap: 6px; }
+.badge::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: currentColor; flex: none; }
 .badge.high { background: #fdecea; color: var(--red); }
 .badge.medium { background: #fef3d7; color: var(--amber); }
 .badge.low { background: #e6f3ec; color: var(--green); }
 .badge.sim { background: #eef2f8; color: var(--navy); }
-table.data { width: 100%; border-collapse: collapse; background: var(--card); border-radius: 16px; overflow: hidden; }
+table.data { width: 100%; border-collapse: collapse; background: var(--card); border-radius: 16px; overflow: hidden; box-shadow: 0 1px 3px rgba(15, 42, 68, 0.05); }
 table.data th, table.data td { text-align: left; padding: 12px 14px; border-bottom: 1px solid var(--border); }
 table.data th { background: #eef2f8; font-size: 0.9rem; }
-.vital-bars { display: flex; gap: 10px; align-items: flex-end; height: 120px; margin: 16px 0; }
-.vital-bars .bar { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 6px; font-size: 0.8rem; color: var(--muted); }
-.vital-bars .bar > span:first-child { width: 100%; background: var(--blue); border-radius: 6px 6px 0 0; display: block; }
+table.data tr:last-child td { border-bottom: none; }
+
+/* 7-day heart-rate chart — rounded bars, value labels, gridlines */
+.vital-bars {
+  display: flex; gap: 12px; align-items: flex-end; height: 190px; margin: 16px 0;
+  padding: 12px 8px 0;
+  background:
+    linear-gradient(to bottom, transparent calc(100% - 1px), #e8edf3 calc(100% - 1px)),
+    linear-gradient(to bottom, transparent calc(66% - 1px), #eef2f8 calc(66% - 1px)),
+    linear-gradient(to bottom, transparent calc(33% - 1px), #eef2f8 calc(33% - 1px));
+  border-radius: 16px;
+}
+.vital-bars .bar { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; gap: 6px; font-size: 0.8rem; color: var(--muted); min-height: 0; }
+.vital-bars .bar-value { font-weight: 800; color: var(--text); font-size: 0.85rem; }
+.vital-bars .bar-fill { width: 100%; max-width: 52px; border-radius: 8px 8px 3px 3px; display: block; background: linear-gradient(180deg, #3d8bdd, var(--blue)); }
+.vital-bars .bar-fill.out { background: linear-gradient(180deg, #e0654f, var(--red)); }
+.vital-bars .bar-day { font-weight: 600; }
+
+/* Circular risk gauge (pure SVG) */
+.gauge-wrap { display: flex; align-items: center; gap: 18px; }
+.gauge { position: relative; width: 132px; height: 132px; flex: none; }
+.gauge svg { display: block; transform: rotate(-90deg); }
+.gauge-track { fill: none; stroke: #e8edf3; stroke-width: 11; }
+.gauge-value { fill: none; stroke-width: 11; stroke-linecap: round; transition: stroke-dashoffset 0.6s ease; }
+.gauge-value.low { stroke: var(--green); }
+.gauge-value.medium { stroke: #e09b1f; }
+.gauge-value.high { stroke: var(--red); }
+.gauge-centre { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.gauge-centre strong { font-size: 1.6rem; letter-spacing: -0.02em; line-height: 1; }
+.gauge-centre span { font-size: 0.78rem; color: var(--muted); font-weight: 600; }
+
 .detail-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin: 20px 0; }
-.detail-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 16px 20px; }
-.detail-card h3 { margin: 0 0 8px; font-size: 0.95rem; color: var(--muted); }
+.detail-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 18px 20px; box-shadow: 0 1px 3px rgba(15, 42, 68, 0.05), 0 8px 20px rgba(15, 42, 68, 0.04); }
+.detail-card h3 { margin: 0 0 8px; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); }
 .detail-card p { margin: 4px 0; }
 ul.factors { padding-left: 20px; }
 ul.factors li { margin-bottom: 6px; }
 .disclaimer { max-width: 1280px; margin: 0 auto; padding: 16px 24px 32px; color: var(--muted); font-size: 0.88rem; }
-.alert-card { background: var(--card); border: 1px solid var(--border); border-left: 4px solid var(--red); border-radius: 12px; padding: 16px 20px; margin-bottom: 12px; }
-.alert-card.resolved { border-left-color: var(--green); opacity: 0.75; }
+.alert-card { background: #fff7f6; border: 1px solid #f0d4d0; border-left: 4px solid var(--red); border-radius: 16px; padding: 18px 20px; margin-bottom: 12px; box-shadow: 0 1px 3px rgba(15, 42, 68, 0.05); }
+.alert-card.resolved { border-left-color: var(--green); background: #f4faf6; border-color: #cfe6d8; opacity: 0.8; }
 .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
 .form-grid label { font-weight: 600; font-size: 0.95rem; display: block; }
 .form-grid label > input, .form-grid label > select { display: block; width: 100%; margin-top: 6px; font-weight: 400; }
-.result { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 20px; margin-top: 24px; }
+.result { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 20px; margin-top: 24px; box-shadow: 0 1px 3px rgba(15, 42, 68, 0.05), 0 8px 20px rgba(15, 42, 68, 0.04); }
+.result.band-high { border-left: 4px solid var(--red); background: linear-gradient(180deg, #fff5f4 0%, #ffffff 60%); }
+.result.band-medium { border-left: 4px solid #e09b1f; background: linear-gradient(180deg, #fffaf0 0%, #ffffff 60%); }
+.result.band-low { border-left: 4px solid var(--green); background: linear-gradient(180deg, #f0f8f3 0%, #ffffff 60%); }
+.result .result-score { font-size: 2rem; font-weight: 800; letter-spacing: -0.02em; }
+
+/* Form panels */
+.form-panel { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 24px; box-shadow: 0 1px 3px rgba(15, 42, 68, 0.05), 0 8px 20px rgba(15, 42, 68, 0.04); }
+.form-panel label { background: #f8fafc; border: 1px solid var(--border); border-radius: 12px; padding: 12px 14px; }
+.form-panel label > input, .form-panel label > select { background: #fff; }
 
 @media (max-width: 700px) {
   main { padding: 16px; }
   .columns { flex-direction: column; }
   .column { min-width: 100%; }
   .nav-links { margin-left: 0; }
+  .hero-band { padding: 24px 20px; }
+  .hero-band h1 { font-size: 1.6rem; }
+  .kpi .value { font-size: 2rem; }
+  .gauge-wrap { flex-direction: column; align-items: flex-start; }
 }

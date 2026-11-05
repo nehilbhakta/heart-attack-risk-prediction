@@ -14,7 +14,7 @@ export default async function Home() {
   );
   return (
     <div>
-      <section className="hero">
+      <section className="hero-band">
         <h1>Heart attack risk, at a glance</h1>
         <p className="tagline">
           20 simulated patients, 7 days of vitals each, scored by an XGBoost
@@ -22,35 +22,48 @@ export default async function Home() {
           patients raise an alert — the local version of the AWS Lambda + SNS
           step from the original project.
         </p>
+        <div className="hero-meta" aria-label="Dashboard summary">
+          <span>XGBoost · UCI Cleveland</span>
+          <span>{dash.total_patients} simulated patients</span>
+          <span>{dash.high_risk_patients} high risk</span>
+        </div>
       </section>
 
       <div className="kpi-grid">
-        <div className="kpi">
+        <div className="kpi kpi-accent-blue">
+          <span className="kpi-icon" aria-hidden="true">👥</span>
           <div className="label">Simulated patients</div>
           <div className="value">{dash.total_patients}</div>
+          <div className="sub">7 days of vitals each</div>
         </div>
-        <div className="kpi danger">
+        <div className="kpi danger kpi-accent-red">
+          <span className="kpi-icon" aria-hidden="true">⚠</span>
           <div className="label">High-risk patients</div>
           <div className="value">{dash.high_risk_patients}</div>
+          <div className="sub">of {dash.total_patients} patients</div>
         </div>
-        <div className="kpi">
+        <div className="kpi kpi-accent-amber">
+          <span className="kpi-icon" aria-hidden="true">🔔</span>
           <div className="label">Open alerts</div>
           <div className="value">{dash.open_alerts}</div>
+          <div className="sub">Need review</div>
         </div>
-        <div className="kpi">
+        <div className="kpi kpi-accent-green">
+          <span className="kpi-icon" aria-hidden="true">✓</span>
           <div className="label">Model ROC-AUC (test)</div>
           <div className="value">{metrics.test_roc_auc.toFixed(3)}</div>
-          <div className="label">
+          <div className="sub">
             Accuracy {(metrics.test_accuracy * 100).toFixed(1)}% · {metrics.rows} training rows
           </div>
         </div>
       </div>
 
-      <h2>Patients — highest risk first</h2>
+      <p className="section-label">Cohort</p>
+      <h2 className="section-title">Patients — highest risk first</h2>
       <p className="muted">All patients are simulated demo data, not real people.</p>
       <div className="patient-grid">
         {sorted.map((p) => (
-          <Link key={p.id} href={`/patients/${p.id}`} className="patient-card">
+          <Link key={p.id} href={`/patients/${p.id}`} className={`patient-card band-${p.latest_risk_band ?? "low"}`}>
             <h2>
               {p.label} <span className="badge sim">Simulated</span>
             </h2>
@@ -64,7 +77,7 @@ export default async function Home() {
               <span className={`badge ${p.latest_risk_band ?? "low"}`}>
                 {p.latest_risk_band ?? "—"} risk
               </span>
-              <span>{pct(p.latest_probability)}</span>
+              <span className="pct">{pct(p.latest_probability)}</span>
             </div>
             <div className="risk-bar">
               <span

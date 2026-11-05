@@ -46,6 +46,7 @@ export default function CheckPage() {
 
   return (
     <div>
+      <p className="section-label">Risk checker</p>
       <h1>Check risk</h1>
       <p className="muted">
         Enter a patient&apos;s clinical values and the trained XGBoost model
@@ -53,7 +54,7 @@ export default function CheckPage() {
         dataset — not a diagnosis.
       </p>
       <form onSubmit={submit}>
-        <div className="form-grid">
+        <div className="form-grid form-panel">
           {FIELDS.map((f) => (
             <label key={f.key}>
               {f.label}
@@ -80,10 +81,10 @@ export default function CheckPage() {
       </form>
       {error && <p className="error">{error}</p>}
       {result && (
-        <div className="result">
+        <div className={`result band-${result.risk_band}`}>
           <h2>
             <span className={`badge ${result.risk_band}`}>{result.risk_band} risk</span>{" "}
-            {pct(result.probability)}
+            <span className="result-score">{pct(result.probability)}</span>
           </h2>
           <p>
             The model estimates a {pct(result.probability)} probability of heart
