@@ -1,0 +1,41 @@
+{
+  "dataset": "UCI Cleveland heart disease (processed.cleveland.data)",
+  "rows": 303,
+  "features": [
+    "age",
+    "sex",
+    "cp",
+    "trestbps",
+    "chol",
+    "fbs",
+    "restecg",
+    "thalach",
+    "exang",
+    "oldpeak",
+    "slope",
+    "ca",
+    "thal"
+  ],
+  "test_accuracy": 0.8852,
+  "test_precision": 0.8182,
+  "test_recall": 0.9643,
+  "test_roc_auc": 0.9567,
+  "cv_roc_auc_mean": 0.8962,
+  "cv_roc_auc_std": 0.0145,
+  "train_roc_auc": 0.9977,
+  "feature_importances": {
+    "age": 0.0445,
+    "sex": 0.0575,
+    "cp": 0.1538,
+    "trestbps": 0.0322,
+    "chol": 0.039,
+    "fbs": 0.0252,
+    "restecg": 0.0415,
+    "thalach": 0.0408,
+    "exang": 0.0859,
+    "oldpeak": 0.048,
+    "slope": 0.0532,
+    "ca": 0.1056,
+    "thal": 0.2727
+  }
+}

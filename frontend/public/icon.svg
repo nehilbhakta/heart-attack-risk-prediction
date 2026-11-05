@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="HeartRisk">
+  <rect width="64" height="64" rx="14" fill="#0f2a44"/>
+  <path d="M32 50 C18 40 12 31 12 23 C12 16 17 12 22 12 C26 12 30 15 32 18 C34 15 38 12 42 12 C47 12 52 16 52 23 C52 31 46 40 32 50 Z" fill="#f2b544"/>
+  <path d="M20 32 h7 l3-6 4 10 3-4 h7" stroke="#0f2a44" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
