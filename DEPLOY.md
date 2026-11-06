@@ -44,13 +44,17 @@ Environment variables on the service:
   `https://heartrisk-api.onrender.com`. Check
   `https://heartrisk-api.onrender.com/api/health` returns `{"status":"ok"}`.
 
-**Seed the simulated patients (one time, in the Render dashboard):**
-Shell tab of the service → run `python -m app.seed` (working directory is
-`backend/`). The seed is idempotent — it skips if patients already exist.
+**Seeding is automatic — no Shell step needed:**
+The backend seeds the 20 simulated patients on startup when the database is
+empty (see the `lifespan` hook in `backend/app/main.py`). This is deliberate:
+Render's free Shell is a paid feature, so `python -m app.seed` cannot be run
+from the dashboard. The startup check only seeds when no patient exists yet
+(`seed()` itself drops and recreates the tables, so it is never called
+unconditionally) — local runs are unaffected.
 
 > SQLite on Render's free tier lives on an ephemeral disk: **data resets on
-> every redeploy/restart**. The simulated cohort can be re-seeded with the
-> command above; predictions/alerts created on the live site are not
+> every redeploy/restart**. The simulated cohort is re-seeded automatically on
+> the next startup; predictions/alerts created on the live site are not
 > preserved. For persistent data, attach a Render Postgres database and set
 > `DATABASE_URL` to its connection string (no code change needed —
 > `DATABASE_URL` is already read from the environment).
