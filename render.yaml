@@ -1,0 +1,27 @@
+# Render Blueprint — HeartRisk backend (FastAPI + XGBoost)
+#
+# In Render: New → Blueprint → select this repo. Render creates the service
+# below from this file. Nothing is deployed from here — this file only
+# describes the service.
+#
+# FRONTEND_URL is dashboard-managed (sync: false): after the Vercel frontend
+# is live, set it in the Render dashboard to the Vercel URL and redeploy the
+# service (or set it before the first deploy if the URL is already known).
+# Until then the backend only accepts requests from http://localhost:3000
+# and http://127.0.0.1:3000.
+
+services:
+  - type: web
+    name: heartrisk-api
+    runtime: python
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /api/health
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.3
+      - key: FRONTEND_URL
+        sync: false
+      - key: DATABASE_URL
+        value: sqlite:///./heartrisk.db
