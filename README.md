@@ -29,6 +29,13 @@ on a laptop.
   and re-scores them
 - "Check risk" form: enter any patient's 13 clinical values and get an
   instant prediction
+- "Upload CSV" page: upload a .csv or .xlsx file with one patient per row
+  and score them all at once. The page lists the 13 required columns with
+  their meaning and valid ranges, and offers a template CSV to download.
+  Each row gets a risk probability, band, and driving factor; bad rows are
+  listed as failed instead of breaking the whole file. Uploaded rows are
+  scored only — they are not saved as patients and never raise alerts.
+  Limits: 500 rows, 5 MB.
 - Dashboard with KPIs: patients, high-risk count, open alerts, model AUC
 
 ## Architecture
@@ -140,6 +147,7 @@ port 8000, frontend on port 3000.
 | `GET /api/patients/{id}` | Patient detail: vitals, features, risk factors |
 | `POST /api/patients/{id}/simulate` | New 7-day vitals + re-score |
 | `POST /api/predict` | Score any 13-feature patient; high risk creates an alert (if `patient_id` given) |
+| `POST /api/predict-batch` | Score a .csv/.xlsx file (one patient per row, all 13 columns); returns per-row risk + summary; rows are never saved and never raise alerts |
 | `GET /api/alerts` | Alert history |
 | `PATCH /api/alerts/{id}/resolve` | Mark an alert resolved |
 

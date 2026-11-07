@@ -81,6 +81,23 @@ export type Prediction = {
   patient_id: number | null;
 };
 
+export type BatchRowResult = {
+  row: number;
+  probability: number | null;
+  risk_band: RiskBand | null;
+  contributions: string[];
+  error: string | null;
+};
+
+export type BatchResult = {
+  filename: string;
+  total_rows: number;
+  scored: number;
+  failed: number;
+  summary: { high: number; medium: number; low: number };
+  results: BatchRowResult[];
+};
+
 export type PatientFeatures = {
   age: number;
   sex: number;
@@ -119,6 +136,27 @@ export const api = {
       method: "POST",
       body: JSON.stringify({ ...features, patient_id: patientId ?? null }),
     }),
+  /** Score many patients from an uploaded .csv/.xlsx file. Uses FormData,
+   * so it must not go through the JSON `request()` helper. */
+  predictBatch: async (file: File): Promise<BatchResult> => {
+    const form = new FormData();
+    form.append("file", file);
+    const res = await fetch(`${API_URL}/api/predict-batch`, {
+      method: "POST",
+      body: form,
+    });
+    if (!res.ok) {
+      let detail = `Upload failed (${res.status}).`;
+      try {
+        const data = await res.json();
+        if (data?.detail) detail = data.detail;
+      } catch {
+        /* keep the fallback message */
+      }
+      throw new Error(detail);
+    }
+    return res.json() as Promise<BatchResult>;
+  },
   listAlerts: () => request<AlertItem[]>("/api/alerts"),
   resolveAlert: (id: number) =>
     request<AlertItem>(`/api/alerts/${id}/resolve`, { method: "PATCH" }),

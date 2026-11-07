@@ -60,10 +60,21 @@ function StethoscopeIcon() {
   );
 }
 
+function UploadIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+      <polyline points="17 8 12 3 7 8" />
+      <line x1="12" x2="12" y1="3" y2="15" />
+    </svg>
+  );
+}
+
 const SEGMENTS = [
   { href: "/", label: "Patients", icon: <PersonIcon />, match: (p: string) => p === "/" || p.startsWith("/patients") },
   { href: "/alerts", label: "Alerts", icon: <BellIcon />, match: (p: string) => p.startsWith("/alerts") },
   { href: "/check", label: "Check risk", icon: <StethoscopeIcon />, match: (p: string) => p.startsWith("/check") },
+  { href: "/upload", label: "Upload CSV", icon: <UploadIcon />, match: (p: string) => p.startsWith("/upload") },
 ];
 
 export default function SiteHeader() {
