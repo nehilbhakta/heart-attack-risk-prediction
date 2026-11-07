@@ -4,10 +4,9 @@ import Link from "next/link";
 import { api, pct } from "@/lib/api";
 
 export default async function Home() {
-  const [dash, patients, metrics] = await Promise.all([
+  const [dash, patients] = await Promise.all([
     api.dashboard(),
     api.listPatients(),
-    api.metrics(),
   ]);
   const sorted = [...patients].sort(
     (a, b) => (b.latest_probability ?? 0) - (a.latest_probability ?? 0)
@@ -52,16 +51,6 @@ export default async function Home() {
             <div className="label">Open alerts</div>
             <div className="value">{dash.open_alerts}</div>
             <div className="sub">Need review</div>
-          </div>
-        </div>
-        <div className="kpi kpi-accent-green">
-          <span className="kpi-icon" aria-hidden="true">✓</span>
-          <div className="kpi-body">
-            <div className="label">Model ROC-AUC (test)</div>
-            <div className="value">{metrics.test_roc_auc.toFixed(3)}</div>
-            <div className="sub">
-              Accuracy {(metrics.test_accuracy * 100).toFixed(1)}% · {metrics.rows} training rows
-            </div>
           </div>
         </div>
       </div>
