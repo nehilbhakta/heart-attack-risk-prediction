@@ -1,5 +1,7 @@
 # HeartRisk — Heart Attack Risk Prediction & Alert Pipeline
 
+**Live app: https://nehilbhakta-heartrisk.vercel.app**
+
 A full-stack rebuild of my IFT 512 course project (Heart Attack Risk
 Prediction and Alert System on AWS), as a **free, local** app — no AWS
 account, no cloud cost. The original ran on S3, EMR/Spark, SageMaker
@@ -151,9 +153,9 @@ port 8000, frontend on port 3000.
 | `GET /api/alerts` | Alert history |
 | `PATCH /api/alerts/{id}/resolve` | Mark an alert resolved |
 
-## Screenshots
+## Live demo
 
-To add after first run.
+The app is deployed with 20 simulated patients: https://nehilbhakta-heartrisk.vercel.app — batch CSV/Excel upload: https://nehilbhakta-heartrisk.vercel.app/upload
 
 ## What this is not
 
