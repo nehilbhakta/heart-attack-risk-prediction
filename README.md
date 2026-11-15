@@ -2,6 +2,8 @@
 
 **Live app: https://nehilbhakta-heartrisk.vercel.app**
 
+![HeartRisk demo — batch-scoring patients from a CSV upload](heartrisk-demo.gif)
+
 A full-stack rebuild of my IFT 512 course project (Heart Attack Risk
 Prediction and Alert System on AWS), as a **free, local** app — no AWS
 account, no cloud cost. The original ran on S3, EMR/Spark, SageMaker
